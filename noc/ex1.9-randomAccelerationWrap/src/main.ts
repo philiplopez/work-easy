@@ -24,6 +24,7 @@ function initialState() : Coordinates {
     }
 }
 
+// utility function
 function wrapToAxis(value_px : number, max_px : number) : number {
     return(value_px < 0
         ? max_px
@@ -32,6 +33,7 @@ function wrapToAxis(value_px : number, max_px : number) : number {
             : value_px);
 }
 
+// utility function
 function wrap({position_px, velocity_pxPerS} : Coordinates, bounds : V.Vector2D) : Coordinates {
     return {
         position_px: {
@@ -44,6 +46,7 @@ function wrap({position_px, velocity_pxPerS} : Coordinates, bounds : V.Vector2D)
 
 // The greek symbol Δ (delta) is often used to mean "change"
 function nextState(deltaTime_s : number, prev : Coordinates) : Coordinates {
+    // we could wrap the below into an "accelerate" function
     const accleration_pxPerS2: V.Vector2D = {
         x: Math.random() * 500 - 250,
         y: Math.random() * 500 - 250
