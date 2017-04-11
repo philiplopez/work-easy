@@ -42,6 +42,8 @@ function accelerate(deltaTime_s : number, prev : Coordinates, acceleration_pxPer
 function nextState(deltaTime_s : number, prev : Coordinates) : Coordinates {
     // We want UserInput to be passed in here, e.g. e.g. UserInput.mouse.x/y
     // (relative to canvas!?)
+    // We also really want Output dimensions
+    // perhaps nextState({deltaTime_s, UserInput, OutputCharacteristics, GameState})
     const unitDirection = V.unitDirection(prev.position_px, mousePosition_px);
     const acceleration_pxPerS2 = V.scale(500, unitDirection);
 
