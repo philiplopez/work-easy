@@ -1,0 +1,19 @@
+{
+  "name": "0.setup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "open 'http://localhost:4444/index.html' && node ./devServer"
+  },
+  "devDependencies": {
+    "fuse-box": "^1.3.131",
+    "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "easy-draw": "^0.6.0",
+    "easy-game": "^0.2.0",
+    "easy-vector2d": "^0.6.0"
+  }
+}
