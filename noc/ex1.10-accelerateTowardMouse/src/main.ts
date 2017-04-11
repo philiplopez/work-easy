@@ -6,6 +6,11 @@ import {createGame} from "easy-game"
 const CANVAS_HEIGHT = 500
 const CANVAS_WIDTH = 500
 
+const mousePosition_px : V.Vector2D = {
+    x: 0,
+    y: 0
+}
+
 interface Coordinates {
     position_px : V.Vector2D,
     velocity_pxPerS : V.Vector2D
@@ -18,8 +23,8 @@ function initialState() : Coordinates {
             y: 150
         },
         velocity_pxPerS: {
-            x: 100,
-            y: -50
+            x: 0,
+            y: 0
         }
     }
 }
@@ -37,11 +42,6 @@ function accelerate(deltaTime_s : number, prev : Coordinates, acceleration_pxPer
 function nextState(deltaTime_s : number, prev : Coordinates) : Coordinates {
     // We want UserInput to be passed in here, e.g. e.g. UserInput.mouse.x/y
     // (relative to canvas!?)
-    const mousePosition_px: V.Vector2D = {
-        x: CANVAS_WIDTH / 2,
-        y: CANVAS_HEIGHT / 2
-    }
-
     const unitDirection = V.unitDirection(prev.position_px, mousePosition_px);
     const acceleration_pxPerS2 = V.scale(500, unitDirection);
 
@@ -58,6 +58,14 @@ function graphicsForState(state : Coordinates) : [D.Drawable]{
 const canvas = document.getElementById("canvas")as HTMLCanvasElement
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
+
+// track mouse position
+function trackMouseMove(e : MouseEvent) {
+    const rect = canvas.getBoundingClientRect();
+    mousePosition_px.x = e.clientX - rect.left;
+    mousePosition_px.y = e.clientY - rect.top
+}
+canvas.addEventListener('mousemove', trackMouseMove, false);
 
 const renderToScreen = makeRender(canvas.getContext("2d"), true);
 const gameLogic = {
